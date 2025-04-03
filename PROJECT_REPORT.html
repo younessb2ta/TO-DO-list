@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Professional Project Report: Todo List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --project-title: #3a0ca3;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: var(--dark);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: var(--light);
+        }
+        
+        .container {
+            padding: 2rem;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 0 0 20px 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .project-title {
+            color: var(--project-title);
+            font-size: 2.2rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        
+        .supervisor {
+            font-style: italic;
+            margin-top: 1rem;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        h2 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--warning);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card {
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(to right, rgba(72, 149, 239, 0.05), white);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .code-block {
+            background-color: var(--dark);
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            margin: 2rem 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        
+        .completed {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .planned {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--accent);
+        }
+        
+        .feature-item h4 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>Professional Project Report</h1>
+            <div class="project-title">Todo List Application</div>
+            <div class="supervisor">Supervised by Dr. Mohamed Zaifri</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Project Overview</h2>
+            <p>A comprehensive task management solution with modern web technologies and responsive design.</p>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>User Experience</h4>
+                    <ul>
+                        <li>Intuitive interface</li>
+                        <li>Responsive design</li>
+                        <li>Visual feedback</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Technical Stack</h4>
+                    <ul>
+                        <li>Node.js backend</li>
+                        <li>MySQL database</li>
+                        <li>Vanilla JS frontend</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Key Metrics</h4>
+                    <ul>
+                        <li>4 API endpoints</li>
+                        <li>5+ implemented features</li>
+                        <li>3 core components</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Technical Specifications</h2>
+            
+            <h3>Frontend Components</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Technology</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Structure</td>
+                    <td>HTML5</td>
+                    <td>Semantic markup and accessibility</td>
+                </tr>
+                <tr>
+                    <td>Styling</td>
+                    <td>CSS3</td>
+                    <td>Responsive design with Flexbox/Grid</td>
+                </tr>
+                <tr>
+                    <td>Logic</td>
+                    <td>JavaScript</td>
+                    <td>DOM manipulation and API integration</td>
+                </tr>
+            </table>
+            
+            <h3>Backend Components</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Technology</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Server</td>
+                    <td>Node.js</td>
+                    <td>JavaScript runtime environment</td>
+                </tr>
+                <tr>
+                    <td>Framework</td>
+                    <td>Express</td>
+                    <td>Web application framework</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>MySQL</td>
+                    <td>Relational database management</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card feature-card">
+            <h2>System Architecture</h2>
+            <div class="code-block">
+                graph TD<br>
+                A[User Interface] -->|HTTP Requests| B[Express Server]<br>
+                B -->|SQL Queries| C[MySQL Database]<br>
+                C -->|Query Results| B<br>
+                B -->|API Responses| A
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Features Implementation</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Task Creation</h4>
+                    <ul>
+                        <li>Text description</li>
+                        <li>Due date selection</li>
+                        <li>Form validation</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Task Management</h4>
+                    <ul>
+                        <li>Mark as complete</li>
+                        <li>Delete tasks</li>
+                        <li>Visual status indicators</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Data Persistence</h4>
+                    <ul>
+                        <li>Automatic saving</li>
+                        <li>Session recovery</li>
+                        <li>Database integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Database Schema</h2>
+            <div class="code-block">
+                CREATE TABLE tasks (<br>
+                &nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+                &nbsp;&nbsp;task_text VARCHAR(255) NOT NULL,<br>
+                &nbsp;&nbsp;due_date DATETIME,<br>
+                &nbsp;&nbsp;completed BOOLEAN DEFAULT FALSE,<br>
+                &nbsp;&nbsp;created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP<br>
+                );
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>API Documentation</h2>
+            <h3>Endpoint Reference</h3>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Method</th>
+                    <th>Parameters</th>
+                    <th>Response</th>
+                </tr>
+                <tr>
+                    <td>/api/tasks</td>
+                    <td>GET</td>
+                    <td>-</td>
+                    <td>Array of tasks</td>
+                </tr>
+                <tr>
+                    <td>/api/tasks</td>
+                    <td>POST</td>
+                    <td>{text, dueDate}</td>
+                    <td>Created task</td>
+                </tr>
+                <tr>
+                    <td>/api/tasks/:id</td>
+                    <td>DELETE</td>
+                    <td>-</td>
+                    <td>Success status</td>
+                </tr>
+                <tr>
+                    <td>/api/tasks/:id</td>
+                    <td>PUT</td>
+                    <td>{completed}</td>
+                    <td>Updated task</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Implemented Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>User Experience</h4>
+                    <ul>
+                        <li><span class="status completed">Implemented</span> Dark mode</li>
+                        <li><span class="status planned">Planned</span> Task categories</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Functionality</h4>
+                    <ul>
+                        <li><span class="status planned">Planned</span> User authentication</li>
+                        <li><span class="status planned">Planned</span> Data export</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>Performance</h4>
+                    <ul>
+                        <li><span class="status planned">Planned</span> Caching system</li>
+                        <li><span class="status planned">Planned</span> Optimized queries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Todo List Application Project Report | Generated on April 3, 2025</p>
+        </div>
+    </div>
+</body>
+</html>

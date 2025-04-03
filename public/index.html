@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Structure principale de l'application -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Based Todo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="themeBtn" class="theme-toggle">🌙</button>
+    <!-- Conteneur principal -->
+    <div class="container">
+        <h1>TO-DO list</h1>
+        
+        <!-- Groupe de saisie des tâches -->
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="New task...">
+            <input type="datetime-local" id="dueDate">
+            <button id="addBtn">Add Task</button>
+        </div>
+        <!-- Filtres d'affichage -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>  
+            <button class="filter-btn" data-filter="active">Active</button>  
+            <button class="filter-btn" data-filter="completed">Completed</button>  
+          </div>
+          <!-- Options de tri -->
+          <div class="sort-options">
+            <select id="sortSelect">  
+              <option value="date">Sort by Date</option>  
+              <option value="alphabetical">Sort Alphabetically</option>  
+            </select>  
+          </div>  
+
+        <!-- Tableau des tâches -->
+        <div class="task-board">
+            <div class="task-header">
+                <span>Task</span>
+                <span>Due Date</span>
+                <span>Actions</span>
+            </div>
+            <div id="taskList"></div>
+        </div>
+        <!-- Compteur de tâches -->
+        <div class="task-counter">
+            <span id="counterText">0/0 tasks remaining</span>
+          </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
